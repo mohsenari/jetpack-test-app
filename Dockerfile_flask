@@ -1,0 +1,16 @@
+FROM amd64/python:3.9-slim
+
+WORKDIR /app
+
+ENV MODULE_NAME api_flask
+ENV PYTHONUNBUFFERED true
+
+COPY requirements.txt *.whl /app/
+
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+COPY ./ /app
+
+ENTRYPOINT [ "python" ]
+
+CMD ["/app/api.py"]
